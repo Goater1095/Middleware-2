@@ -1,17 +1,12 @@
 // app.js
 const express = require('express')
-const exhbs = require('express-handlebars')
 const app = express()
 const port = 3000
-
-//set template engine
-app.engine('hbs', exhbs({ defaultLayout: 'main', extname: '.hbs' }))
-app.set('view engine', 'hbs')
 
 //design time function
 function formatTime(object, req, res, next) {
   let year = object.getFullYear()
-  let month = object.getMonth()
+  let month = object.getMonth() + 1
   let day = object.getDate()
   let hour = object.getHours()
   let minute = object.getMinutes()
@@ -21,7 +16,6 @@ function formatTime(object, req, res, next) {
 //middleware
 app.use(function (req, res, next) {
   const start = new Date()
-  console.log(req)
   if (req) {
     next('route')
   }
@@ -30,23 +24,20 @@ app.use(function (req, res, next) {
 })
 
 //set routes
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
   res.send('列出全部 Todo')
 })
 
-app.get('/new', (req, res, next) => {
+app.get('/new', (req, res) => {
   res.send('新增 Todo 頁面')
-  next()
 })
 
-app.get('/:id', (req, res, next) => {
+app.get('/:id', (req, res) => {
   res.send('顯示一筆 Todo')
-  next()
 })
 
-app.post('/', (req, res, next) => {
+app.post('/', (req, res) => {
   res.send('新增一筆  Todo')
-  next()
 })
 
 app.listen(port, () => {
