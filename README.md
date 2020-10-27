@@ -8,6 +8,7 @@
 - 時間戳記 (time-stamps) - 以當地時間 (台北) 顯示
 - 請求的 HTTP 方法
 - URL
+- spend "total time" from Request to Response
 
 ### 安裝
 
